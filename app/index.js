@@ -50,6 +50,7 @@ function antihorario() {
 function sendFrequency() {
     let freq = freqField.value;
     master.writeSingleRegister(1, 5004, freq);
+    freqField.value = '';
 }
 
 //npm rebuild --runtime=electron --target=1.7.9 --arch=x64 --dist-url=https://atom.io/download/atom-shell (USAR ESTE!)
