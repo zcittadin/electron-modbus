@@ -9,10 +9,20 @@
 
 <body>
     <div class="container">
-        Freqüência de saída:
-        <div id="frequency">000</div>
-        Tensão de saída:
+        Tensão de saída (Volts):
         <div id="voltage">000</div>
+        Corrente de saída (Amperes):
+        <div id="current">000</div>
+        Freqüência de saída (Hertz):
+        <div id="frequency">000</div>
+        <hr>
+        <form>
+            <div class="form-group">
+                <label for="freqSend">Freqüência programada em Hertz:</label>
+                <input type="number" class="form-control" id="freqField" placeholder="Digite a freqüência">
+            </div>
+        </form>
+        <button id="btnSendFreq" class="btn btn-primary">Enviar</button>
         <hr>
         <button class="btn btn-success" id="btnLiga">Liga</button>
         <button class="btn btn-danger" id="btnDesliga">Desliga</button>
