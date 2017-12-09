@@ -11,10 +11,10 @@ let win;
 function createWindow() {
     // Create the browser window.
     win = new BrowserWindow({
-        width: 800,
-        height: 500
+        //width: 800,
+        //height: 500
         //frame: false,
-        //resizable: false
+        resizable: false,
     });
 
     // and load the index.html of the app.
@@ -36,6 +36,8 @@ function createWindow() {
         // Send the timer value
         win.webContents.send('init-modbus', null);
     });
+
+    win.maximize()
 }
 
 // This method will be called when Electron has finished
