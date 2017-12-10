@@ -4,12 +4,17 @@
   "description": "Teste com Modbus",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package-win": "electron-packager . electron-modbus --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/linux.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Electron Modbus\""
   },
   "author": "Zander Cittadin",
   "license": "ISC",
   "dependencies": {
+    "electron": "^1.7.9",
     "modbus-rtu": "^0.2.1",
     "serialport": "^6.0.4"
+  },
+  "devDependencies": {
+    "electron-packager": "^10.1.0"
   }
 }

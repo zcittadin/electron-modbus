@@ -1,23 +1,29 @@
 const electron = require('electron');
-// Module to control application life.
+const { BrowserWindow, ipcMain } = electron;
 const { app } = electron;
-// Module to create native browser window.
-const { BrowserWindow } = electron;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
 
+let modbusInterval;
+
+const SerialPort = require('serialport');
+const ModbusMaster = require('modbus-rtu').ModbusMaster;
+
+//create serail port with params. Refer to node-serialport for documentation 
+const serialPort = new SerialPort("COM7", {
+    baudRate: 9600
+});
+
+//create ModbusMaster instance and pass the serial port object 
+const master = new ModbusMaster(serialPort);
+
 function createWindow() {
-    // Create the browser window.
     win = new BrowserWindow({
-        //width: 800,
-        //height: 500
-        //frame: false,
         resizable: false,
     });
 
-    // and load the index.html of the app.
     win.loadURL(`file://${__dirname}/app/index.html`);
 
     // Open the DevTools.
@@ -33,10 +39,8 @@ function createWindow() {
 
     // When UI has finish loading
     win.webContents.on('did-finish-load', () => {
-        // Send the timer value
-        win.webContents.send('init-modbus', null);
+        win.webContents.send('go-inverter', null);
     });
-
     win.maximize()
 }
 
@@ -60,4 +64,43 @@ app.on('activate', () => {
     if (win === null) {
         createWindow();
     }
+});
+
+
+ipcMain.on('liga', function () {
+    master.writeSingleRegister(1, 5003, 0xF303);
+});
+
+ipcMain.on('desliga', function () {
+    master.writeSingleRegister(1, 5003, 0xF300);
+});
+
+ipcMain.on('horario', function () {
+    master.writeSingleRegister(1, 5003, 0xF404);
+});
+
+ipcMain.on('antihorario', function () {
+    master.writeSingleRegister(1, 5003, 0xF400);
+});
+
+ipcMain.on('sendFrequency', function (e, freq) {
+    master.writeSingleRegister(1, 5004, freq);
+});
+
+function initModbus() {
+    modbusInterval = setInterval(() => {
+        master.readHoldingRegisters(1, 0, 6).then((data) => {// ID, start, lenght
+            win.webContents.send('read-modbus', data);
+        }, (err) => {
+            console.log(err);
+        });
+    }, 1000);
+}
+
+ipcMain.on('start-read', function () {
+    initModbus();
+});
+
+ipcMain.on('stop-read', function () {
+    clearInterval(modbusInterval);
 });

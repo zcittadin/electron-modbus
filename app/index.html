@@ -11,53 +11,23 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="#">
-                <img src="../assets/img/motor.png" width="60" height="60" class="d-inline-block align-middle" alt="">
-            Inverter Commander</a>
+            <img src="../assets/img/motor.png" width="60" height="60" class="d-inline-block align-middle" alt=""> Inverter Commander</a>
         <div class="collapse navbar-collapse">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="#">Home</a>
-                <a class="nav-item nav-link active" href="#">Histórico</a>
-                <a class="nav-item nav-link active" href="#">Sobre</a>
+                <a id="inverter" class="nav-item nav-link active" href="#">Inversor</a>
+                <a id="reports" class="nav-item nav-link active" href="#">Relatórios</a>
             </div>
         </div>
     </nav>
     <br>
     <br>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                Tensão de saída (Volts):
-                <div id="voltage">000</div>
-                Corrente de saída (Amperes):
-                <div id="current">000</div>
-                Freqüência de saída (Hertz):
-                <div id="frequency">000</div>
-            </div>
-            <div class="col-md-6 card" id="freqForm">
-                <div class="card-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="freqSend">Freqüência programada em Hertz:</label>
-                            <input type="number" class="form-control" id="freqField" placeholder="Digite a freqüência">
-                        </div>
-                    </form>
-                    <div>
-                        <button id="btnSendFreq" class="btn btn-primary">Enviar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <h3>Comandos</h1>
-            <button class="btn btn-success" id="btnLiga">Liga</button>
-            <button class="btn btn-danger" id="btnDesliga">Desliga</button>
-            <button class="btn btn-primary" id="btnHorario">Sentido horário</button>
-            <button class="btn btn-warning" id="btnAnti">Sentido Anti-horário</button>
-    </div>
-    <!--script type="text/javascript" src="index.js"></script-->
+
+    <div id="main-content"></div>
+    <script type="text/javascript" src="../assets/js/jquery.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
     <script>
         require('./index.js');
     </script>
+    
 </body>
 
 </html>
