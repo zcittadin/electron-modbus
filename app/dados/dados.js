@@ -72,14 +72,6 @@ function saveData() {
 }
 
 function editItem() {
-    $('#dataModal').on('show.bs.modal', function(e) {
-        
-            //get data-id attribute of the clicked element
-            var bookId = $(e.relatedTarget).data('book-id');
-        
-            //populate the textbox
-            $(e.currentTarget).find('input[name="bookId"]').val(bookId);
-        });
     console.log("EDIT");
 }
 
