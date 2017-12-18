@@ -1,6 +1,7 @@
 var { ipcRenderer } = require('electron');
 
 inverter.addEventListener('click', goInverter);
+dados.addEventListener('click', goDados);
 reports.addEventListener('click', goReports);
 
 ipcRenderer.on('go-inverter', (event, t) => {
@@ -11,6 +12,11 @@ ipcRenderer.on('go-inverter', (event, t) => {
 function goInverter(){
     ipcRenderer.send('start-read');
     $("#main-content").load("./inverter/inverter.html");
+}
+
+function goDados(){
+    ipcRenderer.send('stop-read');
+    $("#main-content").load("./dados/dados.html");
 }
 
 function goReports(){

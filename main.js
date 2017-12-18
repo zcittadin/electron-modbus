@@ -21,7 +21,7 @@ const master = new ModbusMaster(serialPort);
 
 function createWindow() {
     win = new BrowserWindow({
-        resizable: false,
+        resizable: true
     });
 
     win.loadURL(`file://${__dirname}/app/index.html`);
