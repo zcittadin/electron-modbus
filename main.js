@@ -88,13 +88,15 @@ ipcMain.on('sendFrequency', function (e, freq) {
 });
 
 function initModbus() {
-    modbusInterval = setInterval(() => {
-        master.readHoldingRegisters(1, 0, 6).then((data) => {// ID, start, lenght
-            win.webContents.send('read-modbus', data);
-        }, (err) => {
-            console.log(err);
-        });
-    }, 1000);
+    if (!modbusInterval) {
+        modbusInterval = setInterval(() => {
+            master.readHoldingRegisters(1, 0, 6).then((data) => {// ID, start, lenght
+                win.webContents.send('read-modbus', data);
+            }, (err) => {
+                console.log(err);
+            });
+        }, 1000);
+    }
 }
 
 ipcMain.on('start-read', function () {
@@ -103,4 +105,5 @@ ipcMain.on('start-read', function () {
 
 ipcMain.on('stop-read', function () {
     clearInterval(modbusInterval);
+    modbusInterval = null;
 });

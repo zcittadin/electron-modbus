@@ -3,13 +3,13 @@ var Sequelize = require("sequelize");
 var sequelize = new Sequelize('mysql://root:root@localhost:3306/electron');
 var List = require('list.js');
 
-var values = [];
-
-btnSave.addEventListener('click', saveData);
-
 var $ = function (selector) {
     return document.querySelector(selector);
 };
+
+var values = [];
+
+btnSave.addEventListener('click', saveData);
 
 sequelize.authenticate().then(() => {
     console.log('Connection successfully made.');
@@ -59,10 +59,10 @@ function findAll() {
 function saveData() {
     var name;
     var price;
-    name = $(".modal-body #name").val();
-    price = $(".modal-body #price").val();
+    name = $(".modal-body #name").value;
+    price = $(".modal-body #price").value;
     Book.sync().then(() => {
-        $("#exampleModal").modal("hide");
+        //$("#dataModal").modal("hide");
         return Book.create({
             name: name,
             price: price
