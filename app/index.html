@@ -11,7 +11,8 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="#">
-            <img src="../assets/img/motor.png" width="60" height="60" class="d-inline-block align-middle" alt=""></a>
+            <img src="../assets/img/motor.png" width="60" height="60" class="d-inline-block align-middle" alt="">
+        </a>
         <div class="collapse navbar-collapse">
             <div class="navbar-nav">
                 <a id="inverter" class="nav-item nav-link active" href="#">Inversor</a>
@@ -23,13 +24,16 @@
     <br>
     <br>
     <div id="main-content"></div>
-    <script type="text/javascript" src="../assets/js/jquery.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
-    <script type="text/javascript" src="../assets/popper/popper.min.js"></script>
-    <script type="text/javascript" src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <!--script type="text/javascript" src="../assets/js/jquery.min.js" onload="window.$ = window.jQuery = module.exports;"></script-->
     <script>
         require('./index.js');
     </script>
-    
+    <script>
+        window.$ = window.jQuery = require('../assets/js/jquery.min.js');
+    </script>
+    <script type="text/javascript" src="../assets/popper/popper.min.js"></script>
+    <script type="text/javascript" src="../assets/bootstrap/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>
