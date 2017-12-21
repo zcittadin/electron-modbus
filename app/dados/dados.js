@@ -3,7 +3,7 @@ var Sequelize = require("sequelize");
 var sequelize = new Sequelize('mysql://root:root@localhost:3306/electron');
 var List = require('list.js');
 
-var $ = function (selector) {
+var mySelector = function (selector) {
     return document.querySelector(selector);
 };
 
@@ -34,35 +34,36 @@ var tableOptions = {
             <button type="button" class="btn btn-danger">Delete</button></td><tr>`
 };
 
+var bookTable;
+
 function findAll() {
     values = [];
     Book.findAll().then(books => {
         books.forEach(book => {
             values.push(book.dataValues);
         });
-        var bookTable = new List('bookTable', tableOptions, values);
+        bookTable = new List('bookTable', tableOptions, values);
 
-        var btEdit = $('#bookTable').getElementsByClassName('btn-success');
+        var btEdit = mySelector('#bookTable').getElementsByClassName('btn-success');
         for (var i = 0; i < btEdit.length; i++) {
             var btn = btEdit[i];
             btn.addEventListener('click', editItem);
         }
-        var btDelete = $('#bookTable').getElementsByClassName('btn-danger');
+        var btDelete = mySelector('#bookTable').getElementsByClassName('btn-danger');
         for (var i = 0; i < btDelete.length; i++) {
             var btn = btDelete[i];
             btn.addEventListener('click', deleteItem);
         }
-
     });
 }
 
 function saveData() {
     var name;
     var price;
-    name = $(".modal-body #name").value;
-    price = $(".modal-body #price").value;
+    name = mySelector(".modal-body #name").value;
+    price = mySelector(".modal-body #price").value;
     Book.sync().then(() => {
-        //$("#dataModal").modal("hide");
+        //mySelector('#dataModal').getElementsByClassName('modal').modal("hide");
         return Book.create({
             name: name,
             price: price

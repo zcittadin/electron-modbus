@@ -9,17 +9,17 @@ ipcRenderer.on('go-inverter', (event, t) => {
     ipcRenderer.send('init-modbus');
 });
 
-function goInverter(){
+function goInverter() {
     ipcRenderer.send('start-read');
     $("#main-content").load("./inverter/inverter.html");
 }
 
-function goDados(){
+function goDados() {
     ipcRenderer.send('stop-read');
     $("#main-content").load("./dados/dados.html");
 }
 
-function goReports(){
+function goReports() {
     ipcRenderer.send('stop-read');
     $("#main-content").load("./reports/reports.html");
 }
